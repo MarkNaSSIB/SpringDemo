@@ -17,6 +17,11 @@ public class Film {
 
 
   private int id;
+  private String filmTitle;
+  private int runTime;
+  private String releaseDate;
+  private String filmCreator;
+
 
   public Film(int id, String filmTitle, int runTime, String releaseDate, String filmCreator) {
     super();
@@ -32,10 +37,6 @@ public class Film {
     return "Film [id=" + id + ", filmTitle=" + filmTitle + ", releaseDate=" + releaseDate + "]";
   }
 
-  private String filmTitle;
-  private int runTime;
-  private String releaseDate;
-  private String filmCreator;
 
   /**
    * @return the filmTitle
