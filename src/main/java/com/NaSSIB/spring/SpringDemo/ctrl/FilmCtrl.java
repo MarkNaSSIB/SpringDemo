@@ -3,11 +3,13 @@ package com.NaSSIB.spring.SpringDemo.ctrl;
 import static java.util.stream.Collectors.toSet;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.NaSSIB.spring.SpringDemo.model.Film;
 
@@ -32,10 +34,16 @@ public class FilmCtrl {
       Stream.of(film1, film2, film3, film4, film5, film6, film7, film8, film9);
   Set<Film> filmSet = filmStream.collect(toSet());
 
-  // requestmap for films, returns all films
+  // requestmap for films, returns all films with optional category
   @RequestMapping(method = RequestMethod.GET, value = "/films")
-  Set<Film> getFilmSet() {
-    return filmSet;
+  Set<Film> getFilmSet(@RequestParam(name = "filmMaker", required = false) String filmMaker) {
+
+    if (filmMaker != null) {
+      return filmSet.stream().filter(f -> f.getFilmCreator().contains(filmMaker))
+          .collect(Collectors.toSet());
+    } else {
+      return filmSet;
+    }
   }
 
   // requestmap for films with id, returns one film
@@ -60,10 +68,8 @@ public class FilmCtrl {
 
   // requestmap to add new film utilizing POST method
   @RequestMapping(method = RequestMethod.POST, value = "/films")
-  public void addFilm(@RequestBody Film newfilm) {
-    filmSet.add(newfilm);
+  public void addFilm(@RequestBody Film newFilm) {
+    filmSet.add(newFilm);
   }
-
-
 
 }
