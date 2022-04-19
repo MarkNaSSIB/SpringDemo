@@ -14,12 +14,22 @@ public class Film {
    * @param releaseDate
    * @param filmCreator
    */
-  public Film(String filmTitle, int runTime, String releaseDate, String filmCreator) {
-    // super();
+
+
+  private int id;
+
+  public Film(int id, String filmTitle, int runTime, String releaseDate, String filmCreator) {
+    super();
+    this.id = id;
     this.filmTitle = filmTitle;
     this.runTime = runTime;
     this.releaseDate = releaseDate;
     this.filmCreator = filmCreator;
+  }
+
+  @Override
+  public String toString() {
+    return "Film [id=" + id + ", filmTitle=" + filmTitle + ", releaseDate=" + releaseDate + "]";
   }
 
   private String filmTitle;
@@ -69,10 +79,6 @@ public class Film {
     this.releaseDate = releaseDate;
   }
 
-  @Override
-  public String toString() {
-    return "Film [Title=" + filmTitle + ", Release Date=" + releaseDate + "]";
-  }
 
   /**
    * @return the filmCreator
@@ -86,6 +92,14 @@ public class Film {
    */
   public void setFilmCreator(String filmCreator) {
     this.filmCreator = filmCreator;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
 }
