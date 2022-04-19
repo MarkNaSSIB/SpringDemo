@@ -34,7 +34,7 @@ public class Film {
 
   @Override
   public String toString() {
-    return "Film [id=" + id + ", filmTitle=" + filmTitle + ", releaseDate=" + releaseDate + "]";
+    return "Film [id:" + id + ", filmTitle:" + filmTitle + ", releaseDate:" + releaseDate + "]";
   }
 
 
