@@ -1,15 +1,20 @@
 package com.NaSSIB.spring.SpringDemo.service;
 
 import static java.util.stream.Collectors.toSet;
-import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.NaSSIB.spring.SpringDemo.entity.Films;
 import com.NaSSIB.spring.SpringDemo.model.Film;
+import com.NaSSIB.spring.SpringDemo.repo.IFilmsRepo;
 
 @Service
 public class FilmService {
+
+  @Autowired
+  IFilmsRepo filmsRepo;
 
   // instantiate film objects
   Film film1 = new Film(1, "Star Wars", 121, "May 5 1977", "George Lucas");
@@ -29,41 +34,34 @@ public class FilmService {
       Stream.of(film1, film2, film3, film4, film5, film6, film7, film8, film9);
   Set<Film> filmSet = filmStream.collect(toSet());
 
-  public Set<Film> getFilms() {
-    return filmSet;
+  public Iterable<Films> getFilms() {
+    return filmsRepo.findAll();
   }
 
   // function bugged will fix later
-  public Set<Film> getFilms(String filmMaker) {
-    // if (filmMaker == null || filmMaker.isEmpty()) {
-    return filmSet.stream().filter(f -> f.getFilmCreator().contains(filmMaker))
-        .collect(Collectors.toSet());
-    // } else {
-    // return filmSet;
-    // }
+  public Iterable<Films> getFilms(String filmMaker) {
+    return filmsRepo.findAll();
+
   }
 
-  public Set<Film> getAFilm(int identity) {
+  public Optional<Films> getAFilm(int identity) {
 
     // match request id to set of films
-    Stream<Film> resultStream = filmSet.stream().filter(f -> f.getId() == identity);
-    Set<Film> resultSet = resultStream.collect(toSet());
 
-    // null checking
-    if (resultSet.isEmpty()) {
-      // if no id match, return null set
-      Set<Film> emptySet = new HashSet<>();
-      Film notFilm = new Film(-1, "not a film", -1, "January 1 1970", "na");
-      emptySet.add(notFilm);
-      return emptySet;
+    Optional<Films> film1 = filmsRepo.findById(Integer.valueOf(identity));
+
+    if (film1.isPresent()) {
+      // System.out.println(film1.toString()); //for debugging
+      return film1;
     } else {
-      // if id exists, return film
-      return resultSet;
+      System.out.println("cannot find film");
     }
+    return null;
+
   }
 
-  public void addFilm(Film f) {
-
+  public void addFilm(Films f) {
+    filmsRepo.save(f);
   }
 
 }

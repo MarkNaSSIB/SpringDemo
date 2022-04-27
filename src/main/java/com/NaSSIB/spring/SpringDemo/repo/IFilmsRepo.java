@@ -6,6 +6,8 @@ import com.NaSSIB.spring.SpringDemo.entity.Films;
 
 @Repository
 public interface IFilmsRepo extends CrudRepository<Films, Integer> {
+
+  // Iterable<Films> findByFilmCreator();
   // methods available by defualt[without implementation] via CrudRepo
 
 

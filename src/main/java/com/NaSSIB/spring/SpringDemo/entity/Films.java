@@ -17,8 +17,7 @@ public class Films {
 
   @Override
   public String toString() {
-    return "Films [Film Title: " + filmTitle + ", release date: " + releaseDate + ", id: " + id
-        + "]";
+    return "[Film Title: " + filmTitle + ", release date: " + releaseDate + ", id: " + id + "]";
   }
 
   public Integer getId() {
