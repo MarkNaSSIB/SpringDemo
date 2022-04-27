@@ -28,7 +28,7 @@ public class FilmCtrl {
     if (filmMaker == null || filmMaker.isEmpty()) {
       return filmService.getFilms();
     } else {
-      return filmService.getFilms(filmMaker);
+      return filmService.getFilmsByCreator(filmMaker);
     }
   }
 
