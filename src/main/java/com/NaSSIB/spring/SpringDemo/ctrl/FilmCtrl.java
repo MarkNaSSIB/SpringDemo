@@ -17,19 +17,26 @@ public class FilmCtrl {
   @Autowired
   FilmService filmService;
 
-  // do not create variables like this
-  // Set<Film> filmSet = filmService.getFilms();
-
   // requestmap for films, returns all films with optional category
   @RequestMapping(method = RequestMethod.GET, value = "/films")
-  Iterable<Films> getFilmSet(@RequestParam(name = "filmMaker", required = false) String filmMaker) {
+  Iterable<Films> getAllFilms() {
+    return filmService.getFilms();
+  }
+
+  @RequestMapping(method = RequestMethod.GET, value = "/films/m")
+  Iterable<Films> getFilmByCreator(
+      @RequestParam(name = "filmMaker", required = true) String filmMaker) {
 
     System.out.println("request param: " + filmMaker);
-    if (filmMaker == null || filmMaker.isEmpty()) {
-      return filmService.getFilms();
-    } else {
-      return filmService.getFilmsByCreator(filmMaker);
-    }
+    return filmService.getFilmsByCreator(filmMaker);
+  }
+
+  @RequestMapping(method = RequestMethod.GET, value = "/films/t")
+  Iterable<Films> getFilmByTitle(
+      @RequestParam(name = "filmTitle", required = true) String filmTitle) {
+
+    System.out.println("request param: " + filmTitle);
+    return filmService.getFilmsByTitle(filmTitle);
   }
 
   // requestmap for films with id, returns one film
@@ -41,6 +48,11 @@ public class FilmCtrl {
     } finally {
       // bad practice
     }
+  }
+
+  @RequestMapping(method = RequestMethod.GET, value = "/viewers")
+  void getAllViewers() {
+    filmService.getViewers();
   }
 
   // requestmap to add new film utilizing POST method
