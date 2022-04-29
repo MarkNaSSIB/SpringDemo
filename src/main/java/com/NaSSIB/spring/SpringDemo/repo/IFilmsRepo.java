@@ -10,4 +10,10 @@ public interface IFilmsRepo extends CrudRepository<Films, Integer> {
   public Iterable<Films> findByFilmCreator(String filmCreator);
   // how to implement this function and see auto generated functions
 
+  public Iterable<Films> findAll();
+
+  public Iterable<Films> findByFilmTitle(String filmTitle);
+
+
+
 }
