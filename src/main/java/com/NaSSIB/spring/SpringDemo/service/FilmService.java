@@ -1,7 +1,9 @@
 package com.NaSSIB.spring.SpringDemo.service;
 
+import java.util.List;
 import java.util.Optional;
 import com.NaSSIB.spring.SpringDemo.entity.Films;
+import com.NaSSIB.spring.SpringDemo.model.Viewers;
 
 public interface FilmService {
 
@@ -15,5 +17,5 @@ public interface FilmService {
 
   Optional<Films> getAFilm(int identity);
 
-  void getViewers();
+  List<Viewers> getViewers();
 }

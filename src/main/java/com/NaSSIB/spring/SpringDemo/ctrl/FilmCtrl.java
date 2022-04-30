@@ -1,5 +1,6 @@
 package com.NaSSIB.spring.SpringDemo.ctrl;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.NaSSIB.spring.SpringDemo.entity.Films;
+import com.NaSSIB.spring.SpringDemo.model.Viewers;
 import com.NaSSIB.spring.SpringDemo.service.FilmService;
 
 @RestController
@@ -51,8 +53,8 @@ public class FilmCtrl {
   }
 
   @RequestMapping(method = RequestMethod.GET, value = "/viewers")
-  void getAllViewers() {
-    filmService.getViewers();
+  List<Viewers> getAllViewers() {
+    return filmService.getViewers();
   }
 
   // requestmap to add new film utilizing POST method
