@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.NaSSIB.spring.SpringDemo.entity.Viewers;
 import com.NaSSIB.spring.SpringDemo.service.ViewerServImpl;
@@ -37,23 +38,19 @@ public class ViewerCtrl {
   @RequestMapping(method = RequestMethod.GET, value = "/viewers/{id}")
   Optional<Viewers> getAViewer(@PathVariable("id") Integer identity) {
 
-    try {
-      log.debug("Getting viewr: " + identity);
-      return viewerServ.getAViewer(identity);
-    } finally {
-      // bad practice
-    }
+
+    log.debug("Getting viewr: " + identity);
+    return viewerServ.getAViewer(identity);
+
   }
 
-  @RequestMapping(method = RequestMethod.GET, value = "/viewers/a/{activity}")
-  Iterable<Viewers> getViewerByS(@PathVariable("activity") String activity) {
+  @RequestMapping(method = RequestMethod.GET, value = "/viewers/a")
+  Iterable<Viewers> getViewerByS(
+      @RequestParam(name = "activity", required = true) String activity) {
 
-    try {
-      log.debug("Getting viewrs: " + activity);
-      return viewerServ.findByStatus(activity);
-    } finally {
-      // bad practice
-    }
+    log.debug("Getting viewrs: " + activity);
+    return viewerServ.findByStatus(activity);
+
   }
 
 }

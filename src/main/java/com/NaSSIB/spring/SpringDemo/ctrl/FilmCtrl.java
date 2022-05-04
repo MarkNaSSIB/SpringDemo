@@ -26,6 +26,8 @@ public class FilmCtrl {
   Iterable<Films> getAllFilms() {
     log.debug("Getting all films");
     return filmService.getFilms();
+    // FilmResponse filmResp = new FilmResponse();
+    // filmResp.setFilmList((List<Films>) filmService.getFilms());
   }
 
   // requestmap for films, returns from filmMaker param
