@@ -9,4 +9,5 @@ public interface IViewersRepo extends CrudRepository<Viewers, Integer> {
 
   public Iterable<Viewers> findAll();
 
+  public Iterable<Viewers> findByStatus(String activity);
 }

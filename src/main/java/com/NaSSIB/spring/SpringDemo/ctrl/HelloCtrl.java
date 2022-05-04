@@ -18,7 +18,7 @@ public class HelloCtrl {
 
   @GetMapping("/")
   String home() {
-    return "Hello SpringBoot";
+    return "Hello :)";
 
   }
 

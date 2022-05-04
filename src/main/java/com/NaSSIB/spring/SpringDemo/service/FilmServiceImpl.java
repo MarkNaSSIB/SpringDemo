@@ -17,6 +17,7 @@ public class FilmServiceImpl implements FilmService {
   // get all films
   @Override
   public Iterable<Films> getFilms() {
+    log.debug("getting all films");
     return filmsRepo.findAll();
   }
 
@@ -53,6 +54,7 @@ public class FilmServiceImpl implements FilmService {
   // add film to database [in progress]
   @Override
   public void addFilm(Films f) {
+    log.debug("saving film: " + f);
     filmsRepo.save(f);
   }
 
