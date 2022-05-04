@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"id", "name", "email", "gender", "status"})
 @Generated("jsonschema2pojo")
-public class Viewers {
+public class Viewer {
 
   @JsonProperty("id")
   private Integer id;

@@ -11,15 +11,15 @@ public class AllViewers {
 
   // not actually a set, in fact a list
   @JsonProperty("viewerSet")
-  private List<Viewers> viewerSet = null;
+  private List<Viewer> viewerSet = null;
 
   @JsonProperty("viewerSet")
-  public List<Viewers> getViewerSet() {
+  public List<Viewer> getViewerSet() {
     return viewerSet;
   }
 
   @JsonProperty("viewerSet")
-  public void setViewerSet(List<Viewers> viewerSet) {
+  public void setViewerSet(List<Viewer> viewerSet) {
     this.viewerSet = viewerSet;
   }
 

@@ -5,7 +5,17 @@ spring:
     .hibernate:
       .ddl-auto: none
   datasource:
-    .url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/films
+    .url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/film_db
     .username: root
-    .password: 
+    .password: toor
     .driver-class-name: com.mysql.cj.jdbc.Driver
+    
+    
+logging:
+  level:
+    org.springframework: ERROR
+    com.NaSSIB: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"
+    file: "%d %p %c{1.} [%t] %m%n"
+  file: app.log
