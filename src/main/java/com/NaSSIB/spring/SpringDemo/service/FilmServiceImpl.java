@@ -58,5 +58,12 @@ public class FilmServiceImpl implements FilmService {
     filmsRepo.save(f);
   }
 
+  // deletes film by id
+  @Override
+  public void delete(Integer identity) {
+    filmsRepo.deleteById(identity);
+
+  }
+
 
 }

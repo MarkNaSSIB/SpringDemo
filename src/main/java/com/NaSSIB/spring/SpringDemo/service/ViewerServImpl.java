@@ -20,6 +20,7 @@ public class ViewerServImpl implements ViewerServ {
   // rest service implementation
   private static final Logger log = LoggerFactory.getLogger(ViewerServImpl.class);
 
+  // instantiate rest template bean
   @Autowired
   RestTemplate restTempl;
 
@@ -37,9 +38,12 @@ public class ViewerServImpl implements ViewerServ {
     } else {
       // get viewers from api
       Iterator<Viewers> iterate;
+      // api uri for viewers
       String VIEWER_URI = "https://gorest.co.in/public/v2/users";
       List<Viewers> viewerList;
       log.debug("getting viewers");
+
+      // generate response entity
       ResponseEntity<List<Viewers>> viewersListResponse = restTempl.exchange(VIEWER_URI,
           HttpMethod.GET, null, new ParameterizedTypeReference<List<Viewers>>() {});
 
@@ -49,7 +53,6 @@ public class ViewerServImpl implements ViewerServ {
         viewerList = viewersListResponse.getBody();
         viewerList.forEach(v -> addViewer(v));
         iterate = viewerList.iterator();
-        // addViewers((Iterable<Viewers>) iterate);
         log.debug("added viewers to db");
         return (Iterable<Viewers>) iterate;
       } else {
@@ -73,6 +76,7 @@ public class ViewerServImpl implements ViewerServ {
     viewerRepo.saveAll(v);
   }
 
+  // returns a viewer by id
   public Optional<Viewers> getAViewer(Integer identity) {
     Optional<Viewers> viewr = viewerRepo.findById(Integer.valueOf(identity));
 
@@ -91,6 +95,12 @@ public class ViewerServImpl implements ViewerServ {
     log.debug("getting status: " + activity);
     viewerRepo.findByStatus(activity);
     return null;
+  }
+
+  // deletes a viewer by id
+  public void deleteViewer(Integer identity) {
+    viewerRepo.deleteById(identity);
+
   }
 
 

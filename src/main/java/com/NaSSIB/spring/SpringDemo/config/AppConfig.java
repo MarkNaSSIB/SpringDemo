@@ -12,7 +12,7 @@ public class AppConfig {
   @Bean
   public RestTemplate restTemplate(RestTemplateBuilder builder) {
 
-    return builder.setConnectTimeout(Duration.ofMillis(2000))
-        .setReadTimeout(Duration.ofMillis(2000)).build();
+    return builder.setConnectTimeout(Duration.ofMillis(1000))
+        .setReadTimeout(Duration.ofMillis(1000)).build();
   }
 }

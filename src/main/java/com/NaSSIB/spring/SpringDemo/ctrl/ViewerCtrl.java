@@ -4,7 +4,10 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,4 +56,22 @@ public class ViewerCtrl {
 
   }
 
+  // requestmap to add new film utilizing POST method
+  @RequestMapping(method = RequestMethod.POST, value = "/viewers")
+  public void addViewer(@RequestBody Viewers newView) {
+    log.debug("Adding viewer: " + newView);
+    viewerServ.addViewer(newView);
+  }
+
+  @DeleteMapping("viewers/{id}")
+  public HttpStatus delete(@PathVariable("id") Integer identity) {
+    try {
+      viewerServ.deleteViewer(identity);
+      return HttpStatus.OK;
+    } catch (Exception e) {
+      log.error("could not delete entry");
+      return null;
+    }
+
+  }
 }
