@@ -1,6 +1,5 @@
 package com.NaSSIB.spring.SpringDemo.service;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -27,7 +26,6 @@ public class ViewerServImpl implements ViewerServ {
   @Autowired
   IViewersRepo viewerRepo;
 
-  @SuppressWarnings("unchecked")
   @Override
   public Iterable<Viewers> getViewers() {
 
@@ -37,7 +35,7 @@ public class ViewerServImpl implements ViewerServ {
       return viewerRepo.findAll();
     } else {
       // get viewers from api
-      Iterator<Viewers> iterate;
+      // Iterator<Viewers> iterate;
       // api uri for viewers
       String VIEWER_URI = "https://gorest.co.in/public/v2/users";
       List<Viewers> viewerList;
@@ -52,9 +50,9 @@ public class ViewerServImpl implements ViewerServ {
         // viewer adding works
         viewerList = viewersListResponse.getBody();
         viewerList.forEach(v -> addViewer(v));
-        iterate = viewerList.iterator();
+        // iterate = viewerList.iterator();
         log.debug("added viewers to db");
-        return (Iterable<Viewers>) iterate;
+        return getViewers();
       } else {
         // not in repo and api failed
         log.error("bad http response, could not get viewers");
