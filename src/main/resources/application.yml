@@ -1,4 +1,8 @@
 spring:
+  security:
+    user:
+      name: root
+      password: toor
   jpa:
     .database-platform: org.hibernate.dialect.MySQLDialect
     .show-sql: true
@@ -13,7 +17,7 @@ spring:
     
 logging:
   level:
-    org.springframework: ERROR
+    org.springframework: DEBUG
     com.NaSSIB: DEBUG
   pattern:
     console: "%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"
