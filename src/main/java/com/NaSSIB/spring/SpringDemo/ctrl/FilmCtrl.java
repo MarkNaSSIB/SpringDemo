@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.NaSSIB.spring.SpringDemo.entity.Films;
-import com.NaSSIB.spring.SpringDemo.service.FilmService;
+import com.NaSSIB.spring.SpringDemo.service.IFilmService;
 
 @RestController
 public class FilmCtrl {
@@ -21,7 +21,7 @@ public class FilmCtrl {
   private static final Logger log = LoggerFactory.getLogger(FilmCtrl.class);
 
   @Autowired
-  FilmService filmService;
+  IFilmService filmService;
 
   // requestmap for films, returns all films
   @RequestMapping(method = RequestMethod.GET, value = "/films")

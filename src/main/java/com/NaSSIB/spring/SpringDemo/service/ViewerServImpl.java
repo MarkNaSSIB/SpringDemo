@@ -15,7 +15,7 @@ import com.NaSSIB.spring.SpringDemo.entity.Viewers;
 import com.NaSSIB.spring.SpringDemo.repo.IViewersRepo;
 
 @Service
-public class ViewerServImpl implements ViewerServ {
+public class ViewerServImpl implements IViewerServ {
   // rest service implementation
   private static final Logger log = LoggerFactory.getLogger(ViewerServImpl.class);
 

@@ -3,7 +3,7 @@ package com.NaSSIB.spring.SpringDemo.service;
 import java.util.Optional;
 import com.NaSSIB.spring.SpringDemo.entity.Viewers;
 
-public interface ViewerServ {
+public interface IViewerServ {
   // rest service
   public Iterable<Viewers> getViewers();
 

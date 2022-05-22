@@ -9,7 +9,7 @@ import com.NaSSIB.spring.SpringDemo.entity.Films;
 import com.NaSSIB.spring.SpringDemo.repo.IFilmsRepo;
 
 @Service
-public class FilmServiceImpl implements FilmService {
+public class FilmServiceImpl implements IFilmService {
   private static final Logger log = LoggerFactory.getLogger(FilmServiceImpl.class);
   @Autowired
   IFilmsRepo filmsRepo;
