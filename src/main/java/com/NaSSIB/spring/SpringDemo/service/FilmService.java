@@ -15,5 +15,6 @@ public interface FilmService {
 
   Optional<Films> getAFilm(int identity);
 
-  void getViewers();
+  void delete(Integer identity);
+
 }

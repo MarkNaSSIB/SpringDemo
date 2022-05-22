@@ -1,24 +1,23 @@
 package com.NaSSIB.spring.SpringDemo.service;
 
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import com.NaSSIB.spring.SpringDemo.entity.Films;
 import com.NaSSIB.spring.SpringDemo.repo.IFilmsRepo;
 
 @Service
 public class FilmServiceImpl implements FilmService {
-
+  private static final Logger log = LoggerFactory.getLogger(FilmServiceImpl.class);
   @Autowired
   IFilmsRepo filmsRepo;
-
-  @Autowired
-  RestTemplate restTempl;
 
   // get all films
   @Override
   public Iterable<Films> getFilms() {
+    log.debug("getting all films");
     return filmsRepo.findAll();
   }
 
@@ -34,12 +33,6 @@ public class FilmServiceImpl implements FilmService {
     return filmsRepo.findByFilmTitle(filmTitle);
   }
 
-  @Override
-  public void getViewers() {
-    String VIEWER_URI = "https://gorest.co.in/public/v2/users";
-    String viewerStr = restTempl.getForObject(VIEWER_URI, String.class);
-    // method IP
-  }
 
   // get film by id
   @Override
@@ -52,7 +45,7 @@ public class FilmServiceImpl implements FilmService {
       // System.out.println(film1.toString()); //for debugging
       return film1;
     } else {
-      System.out.println("cannot find film");
+      log.error("cannot find film with id: " + identity);
       return null;
     }
 
@@ -61,7 +54,15 @@ public class FilmServiceImpl implements FilmService {
   // add film to database [in progress]
   @Override
   public void addFilm(Films f) {
+    log.debug("saving film: " + f);
     filmsRepo.save(f);
+  }
+
+  // deletes film by id
+  @Override
+  public void delete(Integer identity) {
+    filmsRepo.deleteById(identity);
+
   }
 
 
