@@ -13,11 +13,14 @@ spring:
     .username: root
     .password: toor
     .driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
     
     
 logging:
   level:
-    org.springframework: DEBUG
+    org.springframework: ERROR
     com.NaSSIB: DEBUG
   pattern:
     console: "%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"
