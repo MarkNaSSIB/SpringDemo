@@ -88,6 +88,7 @@ public class ViewerServImpl implements ViewerServ {
 
   }
 
+  // finds viewer by status
   @Override
   public Iterable<Viewers> findByStatus(String activity) {
     log.debug("getting status: " + activity);
@@ -99,6 +100,12 @@ public class ViewerServImpl implements ViewerServ {
   public void deleteViewer(Integer identity) {
     viewerRepo.deleteById(identity);
 
+  }
+
+  // updates existing viewer
+  public void updateViewer(Viewers existView) {
+    log.debug("updating viewer: " + existView);
+    viewerRepo.save(existView);
   }
 
 

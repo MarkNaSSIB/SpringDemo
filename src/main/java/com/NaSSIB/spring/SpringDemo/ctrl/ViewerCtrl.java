@@ -6,10 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.NaSSIB.spring.SpringDemo.entity.Viewers;
@@ -23,22 +24,22 @@ public class ViewerCtrl {
 
   private static final Logger log = LoggerFactory.getLogger(ViewerCtrl.class);
 
-  @RequestMapping(method = RequestMethod.GET, value = "/viewers")
+  // requestmap to get all viewers
+  @GetMapping("/viewers")
   public Iterable<Viewers> getAllViewers() {
     try {
       log.debug("getting all viewrs");
       return viewerServ.getViewers();
     } catch (Exception e) {
       log.error("could not get viewers");
-      // TODO Auto-generated catch block
 
       e.printStackTrace();
       return null;
     }
   }
 
-  // requestmap for films with id, returns one film
-  @RequestMapping(method = RequestMethod.GET, value = "/viewers/{id}")
+  // requestmap for viewers with id, returns one viewer
+  @GetMapping("/viewers/{id}")
   Optional<Viewers> getAViewer(@PathVariable("id") Integer identity) {
 
 
@@ -47,7 +48,8 @@ public class ViewerCtrl {
 
   }
 
-  @RequestMapping(method = RequestMethod.GET, value = "/viewers/a")
+  // requestmap to get all viewers by activity
+  @GetMapping("/viewers/a")
   Iterable<Viewers> getViewerByS(
       @RequestParam(name = "activity", required = true) String activity) {
 
@@ -56,13 +58,21 @@ public class ViewerCtrl {
 
   }
 
-  // requestmap to add new film utilizing POST method
-  @RequestMapping(method = RequestMethod.POST, value = "/viewers")
+  // requestmap to add new viewer utilizing POST method
+  @PostMapping("/viewers")
   public void addViewer(@RequestBody Viewers newView) {
     log.debug("Adding viewer: " + newView);
     viewerServ.addViewer(newView);
   }
 
+  // requestmap for updating viewer utilizing PUT
+  @PutMapping("/viewers")
+  public void updateViewer(@RequestBody Viewers newView) {
+    log.debug("updating viewer: " + newView);
+    viewerServ.updateViewer(newView);
+  }
+
+  // requestmap to delete viewer by ID
   @DeleteMapping("viewers/{id}")
   public HttpStatus delete(@PathVariable("id") Integer identity) {
     try {
