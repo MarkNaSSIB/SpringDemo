@@ -17,4 +17,6 @@ public interface FilmService {
 
   void delete(Integer identity);
 
+  void updateFilm(Films existFilm);
+
 }

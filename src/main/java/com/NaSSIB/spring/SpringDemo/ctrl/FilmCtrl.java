@@ -6,10 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.NaSSIB.spring.SpringDemo.entity.Films;
@@ -24,7 +25,7 @@ public class FilmCtrl {
   FilmService filmService;
 
   // requestmap for films, returns all films
-  @RequestMapping(method = RequestMethod.GET, value = "/films")
+  @GetMapping("/films")
   Iterable<Films> getAllFilms() {
     log.debug("Getting all films");
     return filmService.getFilms();
@@ -33,7 +34,7 @@ public class FilmCtrl {
   }
 
   // requestmap for films, returns from filmMaker param
-  @RequestMapping(method = RequestMethod.GET, value = "/films/m")
+  @GetMapping("/films/m")
   Iterable<Films> getFilmByCreator(
       @RequestParam(name = "filmMaker", required = true) String filmMaker) {
     log.debug("Getting films from: " + filmMaker);
@@ -41,7 +42,7 @@ public class FilmCtrl {
   }
 
   // requestmap for films, returns from filmTitle param
-  @RequestMapping(method = RequestMethod.GET, value = "/films/t")
+  @GetMapping("/films/t")
   Iterable<Films> getFilmByTitle(
       @RequestParam(name = "filmTitle", required = true) String filmTitle) {
     log.debug("Getting film: " + filmTitle);
@@ -49,7 +50,7 @@ public class FilmCtrl {
   }
 
   // requestmap for films with id, returns one film
-  @RequestMapping(method = RequestMethod.GET, value = "/films/{id}")
+  @GetMapping("/films/{id}")
   Optional<Films> getFilmDetails(@PathVariable("id") Integer identity) {
 
     try {
@@ -61,10 +62,17 @@ public class FilmCtrl {
   }
 
   // requestmap to add new film utilizing POST method
-  @RequestMapping(method = RequestMethod.POST, value = "/films")
+  @PostMapping("/films")
   public void addFilm(@RequestBody Films newFilm) {
     log.debug("Adding film: " + newFilm);
     filmService.addFilm(newFilm);
+  }
+
+  // requestmap to update film utilizing PUT method
+  @PutMapping("/films")
+  public void updateFilm(@RequestBody Films existFilm) {
+    log.debug("updating film: " + existFilm);
+    filmService.updateFilm(existFilm);
   }
 
   // delete map for film id
